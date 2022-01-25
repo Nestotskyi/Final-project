@@ -20,27 +20,21 @@ public class ShareNewsPage extends BasePage {
 
     private String stringForXpath="//input[@aria-label='%s']";
 
-            public void fillFormsInputs(Map<String, String> dataForForm) {
+            public void fillFormsInputs (Map < String, String > dataForForm){
                 for (Map.Entry<String, String> entry : dataForForm.entrySet()) {
-
                     if (entry.getKey().equals("story")) {
-                        if (entry.getValue() != null) {
-                            fieldForMessage.sendKeys(entry.getValue());
-                        }
-                    } else
-                        if (entry.getKey().equals("accept")) {
-                            if (entry.getValue().equals("yes")) {
-                                buttonOfAccept.click();
-                            }
-                        } else {
-                            WebElement field = driver.findElement(By.xpath(format(stringForXpath, entry.getKey())));
-                            field.sendKeys(entry.getValue() != null ? entry.getValue() : "");
-                        }
+                            fieldForMessage.sendKeys(entry.getValue() != null ? entry.getValue() : "");
+                    } else {
+                        WebElement field = driver.findElement(By.xpath(format(stringForXpath, entry.getKey())));
+                        field.sendKeys(entry.getValue() != null ? entry.getValue() : "");
+                    }
                 }
             }
-
-
-
+            public void accept(String accept){
+                if (accept.equals("yes")) {
+                    buttonOfAccept.click();
+                }
+            }
     @FindBy(xpath = "//input[@aria-label='Email address']")
     private WebElement fieldForEmail;
     @FindBy(xpath = "//input[@placeholder='Name']")
@@ -53,42 +47,15 @@ public class ShareNewsPage extends BasePage {
     private WebElement buttonOfSubmit;
     @FindBy(xpath = "//div[text()='Email address is invalid']")
     private WebElement reportAboutWrongEmail;
-    @FindBy(xpath = "//button[@aria-label='Close']")
-    private WebElement buttonOfClosePopup;
-    @FindBy(xpath = "//div[text()=' must be accepted']")
-    private WebElement reportAboutMissAccepted;
     @FindBy(xpath = "//div[@class='input-threeup-leading ']//input")
     private WebElement reportAboutMissName;
+    @FindBy(xpath = "//div[contains(@class,'input-container')]//div[@class='input-error-message']")
+    private WebElement reportAboutEmptyMassage;
 
     public boolean isButtonOfSubmitDisplayed(){return buttonOfSubmit.isDisplayed();}
-    public WebElement getReportAboutMissName(){
-        return reportAboutMissName;
-    }
-    public WebElement getReportAboutMissAccepted(){
-        return reportAboutMissAccepted;
-    }
-    public void inputForEmail(String email){
-        fieldForEmail.sendKeys(email);
-    }
     public void clickButtonOfSubmit(){
         buttonOfSubmit.click();
     }
-    public void clickButtonOfAccept(){
-        buttonOfAccept.click();
-    }
-    public void inputMessage(String message){
-        fieldForMessage.sendKeys(message);
-    }
-    public void inputName(String name){
-        fieldForName.sendKeys(name);
-    }
-    public WebElement getReportAboutWrongEmail(){
-        return reportAboutWrongEmail;
-    }
-    public WebElement getButtonOfClosePopup(){
-        return buttonOfClosePopup;
-    }
-    public void clickButtonOfPopup(){
-        buttonOfClosePopup.click();
-    }
+
+
 }

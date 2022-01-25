@@ -11,9 +11,7 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//header//li[@class='orb-nav-newsdotcom']/a[text()='News']")
     private WebElement news;
 
-    public void clickNews(){
-        news.click();
-    }
+    public void clickNews(){news.click();}
     public void openHomePage(){driver.get("https://www.bbc.com/");}
     public void openHomePage1(){driver.get("https://www.bbc.com/news/10725415");}
 }

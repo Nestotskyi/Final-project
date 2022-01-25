@@ -20,12 +20,10 @@ public class NewsPage extends BasePage{
     private WebElement nameOfCategoryOfMainArticle;
     @FindBy(xpath = "//input[@placeholder='Search']")
     private WebElement fieldForSearch;
-
-    public void searchByNameOfCategoryOfMainArticle(){fieldForSearch.sendKeys(getNameOfCategoryOfMainArticle()+"\n");}
-    public String getNameOfCategoryOfMainArticle(){return nameOfCategoryOfMainArticle.getText();}
-    public List<WebElement> getListOfNameOfSecondaryArticle(){return listOfNameOfSecondaryArticle;}
-    public String getTitleOfMainArticle(){return mainArticle.getText();}
-    public void clickCoronavirus(){coronavirus.click();}
+    @FindBy(xpath = "//button[@aria-label='Close']")
+    private WebElement buttonOfClosePopup;
+    @FindBy(xpath = "//div[text()=' must be accepted']")
+    private WebElement reportAboutMissAccepted;
 
     public boolean isTitlesOfSecondaryArticlesCorrect(List<WebElement> webElements, List<String> expectedTitles){
         int count=0;
@@ -38,4 +36,11 @@ public class NewsPage extends BasePage{
         }
         return count==webElements.size();
     }
+    public WebElement getButtonOfClosePopup(){return buttonOfClosePopup;}
+    public void clickButtonOfPopup(){buttonOfClosePopup.click();}
+    public void searchByNameOfCategoryOfMainArticle(){fieldForSearch.sendKeys(getNameOfCategoryOfMainArticle()+"\n");}
+    public String getNameOfCategoryOfMainArticle(){return nameOfCategoryOfMainArticle.getText();}
+    public List<WebElement> getListOfNameOfSecondaryArticle(){return listOfNameOfSecondaryArticle;}
+    public String getTitleOfMainArticle(){return mainArticle.getText();}
+    public void clickCoronavirus(){coronavirus.click();}
 }

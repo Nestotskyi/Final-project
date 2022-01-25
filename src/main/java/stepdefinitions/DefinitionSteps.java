@@ -50,7 +50,7 @@ public class DefinitionSteps {
 
     @And("User clicks on coronavirus")
     public void userClicksOnCoronavirus() {
-        newsPage=pageFactoryManager.getNewsPage();
+
         newsPage.clickCoronavirus();
     }
 
@@ -68,25 +68,14 @@ public class DefinitionSteps {
 
     @And("User closes popup")
     public void userClosesPopup() {
-        shareNewsPage=pageFactoryManager.getShareNewsPage();
-        shareNewsPage.waitVisibilityOfElement(TIME_TO_WAIT,shareNewsPage.getButtonOfClosePopup());
-        shareNewsPage.clickButtonOfPopup();
+        newsPage=pageFactoryManager.getNewsPage();
+        newsPage.waitVisibilityOfElement(TIME_TO_WAIT,newsPage.getButtonOfClosePopup());
+        newsPage.clickButtonOfPopup();
 
-    }
-
-    @And("blabla")
-    public void blabla() {
-
-        homePage=pageFactoryManager.getHomePage();
-        homePage.openHomePage1();
     }
 
     @When("A user fills the form with empty or invalid required fields and clicks or doesn't click on accept")
     public void aUserFillsTheFormWithEmptyOrInvalidRequiredFields(Map<String, String> map) {
-        shareNewsPage=pageFactoryManager.getShareNewsPage();
-        shareNewsPage.waitVisibilityOfElement(30,shareNewsPage.getButtonOfClosePopup());
-        shareNewsPage.clickButtonOfPopup();
-
         shareNewsPage=pageFactoryManager.getShareNewsPage();
         shareNewsPage.fillFormsInputs(map);
 
@@ -100,13 +89,6 @@ public class DefinitionSteps {
     public void userChecksThatSubmitIsStillEnabled() {
         Assert.assertTrue(shareNewsPage.isButtonOfSubmitDisplayed());
     }
-
-
-//    @And("blabla{int}")
-//    public void blabla(int arg0) {
-//        homePage=pageFactoryManager.getHomePage();
-//        homePage.openHomePage1();
-//    }
 
     @And("User opens BBC home page")
     public void userOpensBBCHomePage() {
@@ -136,6 +118,11 @@ public class DefinitionSteps {
     public void userChecksThatTitleIs(String title) {
         searchResultPage=pageFactoryManager.getSearchResultPage();
         Assert.assertEquals(searchResultPage.getNameOfFirstArticle(),title);
+    }
+
+    @And("User clicks on {string}")
+    public void userClicksOnAccept(String accept) {
+        shareNewsPage.accept(accept);
     }
     @After
     public void tearDown() {

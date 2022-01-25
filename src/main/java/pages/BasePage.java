@@ -6,6 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class BasePage {
     WebDriver driver;
     public BasePage(WebDriver driver){
@@ -13,8 +15,7 @@ public class BasePage {
         PageFactory.initElements(driver,this);
     }
     public void waitVisibilityOfElement(long timeToWait, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, timeToWait);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeToWait));
         wait.until(ExpectedConditions.visibilityOf(element));
-
     }
 }
